@@ -12,18 +12,8 @@ def proof_of_work(block):
     while not check_proof(block):
         block['bounce'] += 1
     return block    
+
 def check_proof(block):
     this_proof = hash(block)
     return this_proof[-5:] == '00000'
 
-
-transaction = {"sender": "armin",
-               "receiver": "amin",
-               "amount": 12}
-my_block = {"index": 0,
-            "timestamp": time(),
-            "transaction": transaction}
-
-accepted_block = proof_of_work(my_block)
-print(accepted_block)
-print(hash(accepted_block))
