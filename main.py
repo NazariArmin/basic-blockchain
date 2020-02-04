@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from blockchain import Blockchain
 from sys import argv
 
@@ -15,5 +15,13 @@ def get_chain():
     print(res)
     return jsonify(res)
 
+@app.route('/transaction/create', methods=['POST'])
+def new_trx():
+    values = request.get_json()
+    my_block_chain.new_transaction(values['sender'], values['receiver'], values['amount'])
+    res = {
+        "msg" : "succesfully added"
+    }
+    return jsonify(res)
 app.run(host='localhost', port=port)
 
