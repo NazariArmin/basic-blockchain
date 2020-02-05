@@ -15,7 +15,7 @@ class Blockchain:
     def get_block(self, first_block=False):
         block = {
                     "index": len(self.chain),
-                    "transaction": self.mempool,
+                    "transaction": self.mempool.copy(),
                     "time": time(),
                     "bounce" : 0,
                     "previouse_hash": first_block or hash(self.last_block),
@@ -32,7 +32,6 @@ class Blockchain:
 
     @property
     def get_chain(self):
-        print(self.chain)
         return self.chain
     @property
     def last_block(self):
